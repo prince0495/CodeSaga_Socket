@@ -34,7 +34,7 @@ model Notification {
 }
 
 model User {
-  id                            String    @unique
+  id                            String    @id @unique
   name                          String
   email                         String   @unique
   submissions                   Submission[]
