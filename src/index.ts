@@ -68,7 +68,6 @@ async function main() {
             
             socket.on('workerCallback', async (obj) => {
                 console.log('sent to : '+obj.socketId);
-                socket.to(obj.socketId).emit('codeResponse', obj)
                 if(obj.runnerType === 'submit') {
                     console.log('Submission submitted');
                     const submitStatus = obj.status.includes('Accepted') ? 'Accepted' : obj.status.includes('Wrong Answer') ? 'Wrong Answer' : obj.status.includes('Compilation Error') ? 'Compilation Error' : obj.status.includes('Runtime Error') ? 'Runtime Error' : obj.status.includes('TLE') ? 'Time Limit Reached' : 'Unknown'; 
@@ -310,6 +309,7 @@ async function main() {
                         socket.to(obj.socketId).emit('welcome',error)
                     }
                 }
+                socket.to(obj.socketId).emit('codeResponse', obj)
             })
             
             socket.on('disconnect', ()=> {
